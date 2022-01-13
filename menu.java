@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class menu {
+	//something
     static boolean admin;
     static User user;
     static final private String admin_name="Ananthan";
