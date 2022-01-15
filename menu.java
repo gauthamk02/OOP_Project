@@ -188,7 +188,9 @@ public class menu {
                 mng_hlp_requests();
             }
             if(choice==1){
-
+                del_help_req();
+            }else if(choice==2){
+                read_help_req();
             }
         }
         static boolean del_help_req(){
