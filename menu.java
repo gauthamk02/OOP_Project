@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class menu {
-	//something
+	static Scanner sc = new Scanner(System.in);
     static boolean admin;
     static User user;
     static final private String admin_name="Ananthan";
@@ -19,8 +19,10 @@ public class menu {
         }
     }
     static void admin_menu() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Covid Management System");
+        System.out.println("\n\n\n-------------------------------------");
+        System.out.print("Covid Management System\n------------------------------------\n");
+        System.out.println("Main Menu     @User");
+        System.out.println("-------------------------------------\n");
         System.out.println("1. User Management");
         System.out.println("2. Quarantine Management");
         System.out.println("3. Donations");
@@ -46,12 +48,16 @@ public class menu {
             System.out.println("Please Enter A Valid Input");
             admin_menu();
         }
-        sc.close();
+        
     }
 
     static void user_menu() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Covid Management System");
+        
+        System.out.println("\n\n\n-------------------------------------");
+        System.out.print("Covid Management System\n------------------------------------\n");
+        System.out.println("Main Menu     @User");
+        System.out.println("-------------------------------------\n");
+        
         System.out.println("1. User Management");
         System.out.println("2. Quarantine Management");
         System.out.println("3. Donate");
@@ -77,7 +83,7 @@ public class menu {
             System.out.println("Please Enter A Valid Input");
             user_menu();
         }
-        sc.close();
+        
 
     }
 
@@ -145,8 +151,12 @@ public class menu {
     class help {
         private String username;
         private String passwd;
+        static Scanner sc =new Scanner(System.in);
         static boolean requesthelp() {
-            Scanner sc = new Scanner(System.in);
+            System.out.println("\n\n\n-------------------------------------");
+            System.out.println("Requesting Help     @User");
+            System.out.println("-------------------------------------\n");
+            
             System.out.println("Enter your details \nEnter your name:");
             String name = null;
             try {
@@ -175,8 +185,10 @@ public class menu {
         }
 
         static void mng_hlp_requests() {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Welcome to the Hel Requests Management Software :\nwhat would you like to do ?");
+            System.out.println("\n\n\n-------------------------------------");
+            System.out.println("Help Requests Management     @Admin");
+            System.out.println("-------------------------------------\n");
+            System.out.println("Welcome to the Help Requests Management Software :\nwhat would you like to do ?");
             System.out.println("1.Delete All Help Requests");
             System.out.println("2.Get Help Request Data");
             System.out.println("Enter your choice");
