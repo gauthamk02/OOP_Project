@@ -35,7 +35,7 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		 int choice,c=0;
 		 while(true) {
- 		 System.out.println("\n\nMain Menu\n1.Admin");
+ 		 System.out.println("\n\n------------\nMain Menu\n------------\n1.Admin");
  		 System.out.println("2.User");
  		 System.out.println("3.Exit");
  		 System.out.println("Enter your choice=");
@@ -77,7 +77,7 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		while(true) {
-		System.out.println("\n\nAdminMenu\n1.add user");
+		System.out.println("\n\n------------\nAdmin Menu\n------------\n1.add user");
 		System.out.println("2.modify user");		
 		System.out.println("3.delete user");
 		System.out.println("4.Print one user");     
@@ -121,7 +121,7 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		int select;
 		while(true) {
-		System.out.println("\n\nUser Menu\n1. View USER DETAILS");
+		System.out.println("\n\n------------\nUser Menu\n------------\n1. View USER DETAILS");
 		System.out.println("2. Enter view own details");
 		System.out.println("3. Main menu");
 
