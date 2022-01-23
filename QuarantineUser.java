@@ -1,8 +1,11 @@
 import java.util.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-class QuarantineUser extends User
+class QuarantineUser extends User implements Serializable 
 {
+    private static final long serialVersionUID = 1L;
+    
     LocalDate qurantineBeginDate;
     LocalDate qurantineEndDate;
     int quarantineDays;
@@ -51,6 +54,7 @@ class QuarantineUser extends User
     @Override
     public String toString() {
         return "\nName: " + getName() + "\nAddress: " + getAddress() + "\nUserId: " + getUserId() +
-        "\nEmailId: " + getEmailId() + "\nCovid Status: "+covidstatus +" \nVaccinated Doses: "+vaccinateddoses+"\nAge: "+age+"\nPhoneNo=" + getPhoneNo() ;
+        "\nEmailId: " + getEmailId() + "\nCovid Status: "+covidstatus +" \nVaccinated Doses: "+vaccinateddoses+"\nAge: "+age+"\nPhoneNo=" + getPhoneNo() +
+        "\nQuarantine Days: " + getQuarantineDays();
     }
 }

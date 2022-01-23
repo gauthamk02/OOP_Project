@@ -83,12 +83,53 @@ public class menu {
             System.out.println("Please Enter A Valid Input");
             user_menu();
         }
-        
+    }
 
+    public static List<?> convertObjectToList(Object obj) 
+    {
+        List<?> list = new ArrayList<>();
+        if (obj.getClass().isArray()) {
+            list = Arrays.asList((Object[])obj);
+        } else if (obj instanceof Collection) {
+            list = new ArrayList<>((Collection<?>)obj);
+        }
+        return list;
     }
 
     public static void main(String[] args) {
-        fillList();
+        /*fillList();
+        try
+        {
+            saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");
+            saveToFile(UserManagement.UserData, "User.dat");
+        }
+        catch(IOException ioe)
+        {
+            System.out.println(ioe);
+        }
+        catch(ClassNotFoundException cnfe)
+        {
+            System.out.println(cnfe);
+        }
+        QuarantineManagement.printQuarantineUsers();
+        QuarantineManagement.quarantineUserList.clear();
+        QuarantineManagement.printQuarantineUsers();
+        */
+        try
+        {
+            //QuarantineManagement.quarantineUserList = (ArrayList<QuarantineUser>) convertObjectToList(loadFromFile("Qusers.dat"));   
+            QuarantineManagement.quarantineUserList = loadFromFile("Qusers.dat");
+            UserManagement.UserData = loadFromFile("User.dat");  
+
+        }
+        catch(IOException ioe)
+        {
+            System.out.println(ioe);
+        }
+        catch(ClassNotFoundException cnfe)
+        {
+            System.out.println(cnfe);
+        }
 
         Scanner sc = new Scanner(System.in);
         //input username
@@ -106,8 +147,42 @@ public class menu {
         } else {
             user_menu();
         }
+
         sc.close();
 
+        try
+        {
+            saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");   
+            saveToFile(UserManagement.UserData, "User.dat");
+        }
+        catch(IOException ioe)
+        {
+            System.out.println(ioe);
+        }
+        catch(ClassNotFoundException cnfe)
+        {
+            System.out.println(cnfe);
+        }
+    }
+    public static  <T> T loadFromFile(String filename) throws IOException, ClassNotFoundException {
+        /*FileInputStream fis = new FileInputStream(filename);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        Object decList = ois.readObject();
+        ois.close();
+        fis.close();
+        return decList;*/
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
+        Object obj =  in.readObject();
+        in.close();
+        return (T) obj;    
+    }
+
+    public static <T> void saveToFile(T list, String filename) throws IOException, ClassNotFoundException {
+        FileOutputStream fos = new FileOutputStream(filename);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(list);
+        oos.close();
+        fos.close();
     }
 
     static void fillList()
