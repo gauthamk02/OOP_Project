@@ -139,7 +139,6 @@ public class UserManagement {
         System.out.println(menu.user.toString());
 		break;
 	case 3: 
-        mainMenu();
 		break;
 	}
 		}
@@ -360,7 +359,9 @@ class User implements Serializable
     private String phoneNo;
     public int age;
     public int vaccinateddoses;
-    public String covidstatus; 
+    public String covidstatus;
+    private boolean admin;
+
     public String getAddress(){
         return address;
     }
@@ -420,7 +421,14 @@ class User implements Serializable
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
-    
+    public boolean getAdmin()
+    {
+        return this.admin;
+    }
+    public void setAdmin(boolean admin)
+    {
+        this.admin = admin;
+    } 
     @Override
     public String toString() {
         return  "\nName=" + Name + "\nuserId=" + userId +"\nAddress=" + address + "\npassword=" +

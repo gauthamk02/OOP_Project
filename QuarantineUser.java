@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 class QuarantineUser extends User implements Serializable 
 {
-    private static final long serialVersionUID = 1L;
     
     LocalDate qurantineBeginDate;
     LocalDate qurantineEndDate;

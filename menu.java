@@ -97,8 +97,8 @@ public class menu {
     }
 
     public static void main(String[] args) {
-        /*fillList();
-        try
+        //fillList();
+        /*try
         {
             saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");
             saveToFile(UserManagement.UserData, "User.dat");
@@ -119,7 +119,8 @@ public class menu {
         {
             //QuarantineManagement.quarantineUserList = (ArrayList<QuarantineUser>) convertObjectToList(loadFromFile("Qusers.dat"));   
             QuarantineManagement.quarantineUserList = loadFromFile("Qusers.dat");
-            UserManagement.UserData = loadFromFile("User.dat");  
+            UserManagement.UserData = loadFromFile("User.dat");
+            donationmenu.donationList = loadFromFile("donations.dat");  
 
         }
         catch(IOException ioe)
@@ -199,6 +200,7 @@ public class menu {
 		 user1.setCovidstatus("n");
          user1.setAge(18);
          user1.setVaccinateddoses(2);
+         user1.setAdmin(true);
          user2.setUserName(2);
  		user2.setName("Ajay");
  		user2.setAddress("chirala");
@@ -206,6 +208,7 @@ public class menu {
  		 user2.setEmailId("@gmail.com");
  		 user2.setPassword("asdfghjkl");
  		 user2.setCovidstatus("n");
+          user2.setAdmin(false);
           user2.setAge(21);
           user2.setVaccinateddoses(2);
  		 UserManagement.UserData.add(user1);
@@ -220,6 +223,7 @@ public class menu {
         qu.setEmailId("email@gmail.com");
         qu.setName("Rohan");
         qu.setPhoneNo("123456789");
+        qu.setAdmin(true);
 
         QuarantineManagement.quarantineUserList.add(qu);
     }
