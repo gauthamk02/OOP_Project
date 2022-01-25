@@ -1,7 +1,8 @@
 //donation.java
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class donation{
+public class donation implements Serializable{
     String userid;
     int amount;
     LocalDate donationdate = LocalDate.now();

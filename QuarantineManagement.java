@@ -1,7 +1,9 @@
 import java.util.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-public class QuarantineManagement {
+public class QuarantineManagement{
     static Scanner in;
     static ArrayList<QuarantineUser> quarantineUserList = new ArrayList<QuarantineUser>();
 
@@ -55,7 +57,7 @@ public class QuarantineManagement {
 
     public static void admin_menu()
     {
-        QuarantineUser qu = new QuarantineUser();
+        /*QuarantineUser qu = new QuarantineUser();
         qu.setAddress("Kollam");
         qu.setUserName(4);
         qu.setAge(18);
@@ -65,11 +67,12 @@ public class QuarantineManagement {
         qu.setName("Rohan");
         qu.setPhoneNo("123456789");
 
-        quarantineUserList.add(qu);
+        quarantineUserList.add(qu);*/
 
         Scanner in = new Scanner(System.in);
 
-        while(true){
+        boolean running = true;
+        while(running){
             System.out.print("\n\n\n-------------------------------------\n" +
             "Quarantine Management     @Admin\n" +
             "-------------------------------------\n\n" +
@@ -78,7 +81,8 @@ public class QuarantineManagement {
             "3. Sort Users\n" +
             "4. Add Users\n" +
             "5. Modify User Details\n" +
-            "6. Back\n" +
+            "6. Delete User\n" +
+            "7. Back\n" +
             "Enter the choice: ");
         int choice = in.nextInt();
 
@@ -137,10 +141,12 @@ public class QuarantineManagement {
                 }
             case 4:
                 QuarantineUser user = new QuarantineUser();
+
                 System.out.print(" Enter userId: ");
                 int userId = in.nextInt();
                 user.setUserName(userId);
                 
+                if(in.hasNextLine()) in.nextLine();
                 System.out.print(" Enter Name: ");
                 String Name = in.nextLine();
                 user.setName(Name);
@@ -173,18 +179,19 @@ public class QuarantineManagement {
                 System.out.print(" Enter vaccinateddoses: ");
                 int vaccinateddoses = in.nextInt();
                 user.setVaccinateddoses(vaccinateddoses);
-                
-                System.out.print(" Enter Quarantine Begin Date: ");
+
+                System.out.print(" Enter Quarantine Begin Date(yyyy-mm-dd): ");
                 LocalDate quarantineBeginDate = LocalDate.parse(in.next());
                 user.setQuarantineBeginDate(quarantineBeginDate);
 
-                System.out.print(" Enter Quarantine End Date: ");
+                System.out.print(" Enter Quarantine End Date(yyyy-mm-dd): ");
                 LocalDate quarantineEndDate = LocalDate.parse(in.next());
                 user.setQuarantineBeginDate(quarantineEndDate);
 
                 System.out.print(" Enter if Primary Contact: ");
                 boolean primaryContact = in.nextBoolean();
                 user.setPrimaryContact(primaryContact);
+                quarantineUserList.add(user);
                 
                 break;
             case 5:
@@ -197,6 +204,22 @@ public class QuarantineManagement {
                         updateUserDetails(User);
                     } 
                 }
+                break;
+            case 6:
+                System.out.print("Enter the UserID of the user: ");
+                int usrid = in.nextInt();
+                for(int i = 0; i < quarantineUserList.size(); i++)
+                {
+                    QuarantineUser User = quarantineUserList.get(i);
+                    if(User.getUserId() == usrid)
+                    {
+                        quarantineUserList.remove(i);
+                        System.out.println("Removed User");
+                    } 
+                }
+                break;
+            case 7:
+                running = false;
                 break;
             default:
                 System.out.println("Undefined choice!");
@@ -380,6 +403,7 @@ public class QuarantineManagement {
                 int userId = in.nextInt();
                 user.setUserName(userId);
                 
+                if(in.hasNextLine()) in.nextLine();
                 System.out.print(" Enter Name: ");
                 String Name = in.nextLine();
                 user.setName(Name);
@@ -413,18 +437,18 @@ public class QuarantineManagement {
                 int vaccinateddoses = in.nextInt();
                 user.setVaccinateddoses(vaccinateddoses);
                 
-                System.out.print(" Enter Quarantine Begin Date: ");
+                System.out.print(" Enter Quarantine Begin Date(yyyy-mm-dd)): ");
                 LocalDate quarantineBeginDate = LocalDate.parse(in.next());
                 user.setQuarantineBeginDate(quarantineBeginDate);
 
-                System.out.print(" Enter Quarantine End Date: ");
+                System.out.print(" Enter Quarantine End Date(yyyy-mm-dd): ");
                 LocalDate quarantineEndDate = LocalDate.parse(in.next());
                 user.setQuarantineBeginDate(quarantineEndDate);
 
                 System.out.print(" Enter if Primary Contact: ");
                 boolean primaryContact = in.nextBoolean();
                 user.setPrimaryContact(primaryContact);
-                
+                quarantineUserList.add(user);
                 break;
             case 5:
                 System.out.print("Enter the UserID of the user: ");
@@ -467,9 +491,10 @@ public class QuarantineManagement {
         switch(upChoice)
         {
             case 1:
+                if(in.hasNextLine()) in.nextLine();
                 System.out.println("Curent Name: " +  user.getName());
                 System.out.println("Enter new Name: ");
-                String newName = in.next();
+                String newName = in.nextLine();
                 user.setName(newName);
                 break;
             case 2:
@@ -516,13 +541,13 @@ public class QuarantineManagement {
                 break;
             case 9:
                 System.out.println("Curent Quarantine Begin Date: " +  user.getQuarantineBeginDate());
-                System.out.println("Enter new Quarantine Begin Date: ");
+                System.out.println("Enter new Quarantine Begin Date(yyyy-mm-dd): ");
                 LocalDate newQuarantineBeginDate = LocalDate.parse(in.next());
                 user.setQuarantineBeginDate(newQuarantineBeginDate);
                 break;
             case 10:
                 System.out.println("Curent Quarantine End Date: " +  user.getQuarantineEndDate());
-                System.out.println("Enter new Quarantine End Date: ");
+                System.out.println("Enter new Quarantine End Date(yyyy-mm-dd): ");
                 LocalDate newQuarantineEndDate = LocalDate.parse(in.next());
                 user.setQuarantineEndDate(newQuarantineEndDate);
                 break;
@@ -534,7 +559,6 @@ public class QuarantineManagement {
                 break;
             case 12:
                 System.out.println("Curent Primary Contact: " +  user.getPrimaryContact());
-                System.out.println("Enter new Quarantine end Date: ");
                 Boolean newPrimaryContact = in.nextBoolean();
                 user.setPrimaryContact(newPrimaryContact);
                 break;

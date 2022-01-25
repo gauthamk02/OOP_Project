@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -5,6 +6,8 @@ import java.util.Scanner;
 
 public class UserManagement {
 	static ArrayList<User> UserData = new ArrayList();
+    static Scanner in = new Scanner(System.in);
+
 	public static void main(String[] args) {
         User user1 = new User();
 		User user2 = new User();
@@ -35,11 +38,11 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		 int choice,c=0;
 		 while(true) {
- 		 System.out.println("\n\n------------\nMain Menu\n------------\n1.Admin");
+ 		 System.out.println("\n\nMain Menu\n1.Admin");
  		 System.out.println("2.User");
  		 System.out.println("3.Exit");
  		 System.out.println("Enter your choice=");
- 		 choice=Integer.parseInt(sc.nextLine());
+ 		 choice=in.nextInt();
  		 switch(choice) {
  		 case 1:
  			adminMenu();
@@ -77,7 +80,7 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		while(true) {
-		System.out.println("\n\n------------\nAdmin Menu\n------------\n1.add user");
+		System.out.println("\n\nAdminMenu\n1.add user");
 		System.out.println("2.modify user");		
 		System.out.println("3.delete user");
 		System.out.println("4.Print one user");     
@@ -121,7 +124,7 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		int select;
 		while(true) {
-		System.out.println("\n\n------------\nUser Menu\n------------\n1. View USER DETAILS");
+		System.out.println("\n\nUser Menu\n1. View USER DETAILS");
 		System.out.println("2. Enter view own details");
 		System.out.println("3. Main menu");
 
@@ -136,7 +139,6 @@ public class UserManagement {
         System.out.println(menu.user.toString());
 		break;
 	case 3: 
-        mainMenu();
 		break;
 	}
 		}
@@ -342,10 +344,13 @@ public class UserManagement {
         System.out.println("Details are updated");
         adminMenu();
     }
+
+    
 }
 
 
-class User {
+class User implements Serializable
+{
     private String address;
     private String Name;
     private int userId;
@@ -354,7 +359,9 @@ class User {
     private String phoneNo;
     public int age;
     public int vaccinateddoses;
-    public String covidstatus; 
+    public String covidstatus;
+    private boolean admin;
+
     public String getAddress(){
         return address;
     }
@@ -414,7 +421,14 @@ class User {
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
-    
+    public boolean getAdmin()
+    {
+        return this.admin;
+    }
+    public void setAdmin(boolean admin)
+    {
+        this.admin = admin;
+    } 
     @Override
     public String toString() {
         return  "\nName=" + Name + "\nuserId=" + userId +"\nAddress=" + address + "\npassword=" +
