@@ -57,7 +57,7 @@ public class QuarantineManagement{
 
     public static void admin_menu()
     {
-        QuarantineUser qu = new QuarantineUser();
+        /*QuarantineUser qu = new QuarantineUser();
         qu.setAddress("Kollam");
         qu.setUserName(4);
         qu.setAge(18);
@@ -67,7 +67,7 @@ public class QuarantineManagement{
         qu.setName("Rohan");
         qu.setPhoneNo("123456789");
 
-        quarantineUserList.add(qu);
+        quarantineUserList.add(qu);*/
 
         Scanner in = new Scanner(System.in);
 

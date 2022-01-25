@@ -154,6 +154,7 @@ public class menu {
         {
             saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");   
             saveToFile(UserManagement.UserData, "User.dat");
+            saveToFile(donationmenu.donationList, "Donations.dat");
         }
         catch(IOException ioe)
         {
