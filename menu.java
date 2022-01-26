@@ -5,18 +5,21 @@ public class menu {
 	static Scanner sc = new Scanner(System.in);
     static boolean admin;
     static User user;
-    static final private String admin_name="Ananthan";
-    static final private String admin_passwd="1234";
+    //static final private String admin_name="Ananthan";
+    //static final private String admin_passwd="1234";
     static int admin(String username, String passwd){
-        if(username.equals(admin_name)) {
-            if (passwd.equals(admin_passwd)) {
-                return 1;
-            } else {
-                return -1;
+        for(User i : UserManagement.UserData){
+            if(username==i.getName()){
+                if(passwd==i.getPassword()){
+                    return 1;
+                }else{
+                    return -1;
+                }
+            }else{
+                return 0;
             }
-        }else {
-            return 0;
         }
+        return 1;
     }
     static void admin_menu() {
         System.out.println("\n\n\n-------------------------------------");
@@ -28,7 +31,7 @@ public class menu {
         System.out.println("3. Donations");
         System.out.println("4. Manage help Requests");
         System.out.println("5. Quit");
-        System.out.println("Enter your choice :");
+        System.out.print("Enter your choice : ");
         int choice = sc.nextInt();
         if (choice == 1) {
             // usermanagement(username,passwrd);
@@ -63,7 +66,7 @@ public class menu {
         System.out.println("3. Donate");
         System.out.println("4. Request Help");
         System.out.println("5. Quit");
-        System.out.println("Enter your choice :");
+        System.out.print("Enter your choice : ");
         int choice = sc.nextInt();
         if (choice == 1) {
             //usermanagement(username,passwrd);
