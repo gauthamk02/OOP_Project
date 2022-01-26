@@ -21,7 +21,7 @@ public class menu {
     static void admin_menu() {
         System.out.println("\n\n\n-------------------------------------");
         System.out.print("Covid Management System\n------------------------------------\n");
-        System.out.println("Main Menu     @User");
+        System.out.println("Main Menu     @Admin");
         System.out.println("-------------------------------------\n");
         System.out.println("1. User Management");
         System.out.println("2. Quarantine Management");
@@ -134,11 +134,11 @@ public class menu {
 
         Scanner sc = new Scanner(System.in);
         //input username
-        System.out.println("Enter your username :");
+        System.out.print("Enter your username : ");
         String user = sc.next();
 
         //input password
-        System.out.println("Enter your password :");
+        System.out.print("Enter your password : ");
         String passwd = sc.next();
         if (menu.admin(user, passwd) == 1) {
             admin_menu();
@@ -237,7 +237,7 @@ public class menu {
             System.out.println("Requesting Help     @User");
             System.out.println("-------------------------------------\n");
             
-            System.out.println("Enter your details \nEnter your name:");
+            System.out.print("Enter your details \nEnter your name: ");
             String name = null;
             try {
                 name = sc.next();
@@ -245,8 +245,9 @@ public class menu {
                 System.out.println("You Have Entered Invalid Details!!");
                 requesthelp();
             }
-            System.out.println("Enter The Bugs or uncomfortabilities you are feeling in the program ");
-            String Message = sc.nextLine();
+            System.out.print("Enter The Bugs or uncomfortabilities you are feeling in the program :");
+            String Message = sc.next();
+            Message+=sc.nextLine();
             Date date = Calendar.getInstance().getTime();
 
             try {
@@ -255,7 +256,7 @@ public class menu {
                 if (!f.exists()) {
                     f.createNewFile();
                 }
-                fw.write(name + "\t" + Message + "\t" +date);
+                fw.write("Name :"+name + "\t"+"\t"+"Message :" + Message +"\t"+ "\t"+"Date :" +date+"\n");
                 fw.close();
 
             } catch (IOException e) {
@@ -271,7 +272,7 @@ public class menu {
             System.out.println("Welcome to the Help Requests Management Software :\nwhat would you like to do ?");
             System.out.println("1.Delete All Help Requests");
             System.out.println("2.Get Help Request Data");
-            System.out.println("Enter your choice");
+            System.out.print("Enter your choice : ");
             int choice = 0;
             try {
                 choice = sc.nextInt();
