@@ -6,29 +6,81 @@ import java.util.Scanner;
 public class UserManagement {
 	static ArrayList<User> UserData = new ArrayList();
 	public static void main(String[] args) {
-        User user1 = new User();
+                User user1 = new User();
 		User user2 = new User();
+		User user3 = new User();
+ 		User user4 = new User();
+ 		User user5 = new User();
+ 		User user6 = new User();
+ 		
 		user1.setUserName(1);
 		user1.setName("vijay");
 		user1.setAddress("chirala");
-		 user1.setPhoneNo("81236789087");
-		 user1.setEmailId("@gmail.com");
-		 user1.setPassword("qwerty");
-		 user1.setCovidstatus("n");
-         user1.setAge(18);
-         user1.setVaccinateddoses(2);
-         user2.setUserName(2);
+		user1.setPhoneNo("81236789087");
+		user1.setEmailId("1@gmail.com");
+		user1.setPassword("qwerty");
+		user1.setCovidstatus("n");
+                user1.setAge(18);
+                user1.setVaccinateddoses(2);
+        
+                user2.setUserName(2);
  		user2.setName("Ajay");
  		user2.setAddress("chirala");
- 		 user2.setPhoneNo("9876543210");
- 		 user2.setEmailId("@gmail.com");
- 		 user2.setPassword("asdfghjkl");
- 		 user2.setCovidstatus("n");
-          user2.setAge(21);
-          user2.setVaccinateddoses(2);
- 		 UserData.add(user1);
- 		 UserData.add(user2);
-          mainMenu();
+ 		user2.setPhoneNo("9876543210");
+ 		user2.setEmailId("2@gmail.com");
+ 		user2.setPassword("ajay123");
+ 		user2.setCovidstatus("y");
+                user2.setAge(21);
+                user2.setVaccinateddoses(2);
+ 		
+ 	
+ 		user3.setUserName(3);
+ 		user3.setName("hemanth");
+ 		user3.setAddress("mumbai");
+ 		user3.setPhoneNo("9289033333");
+ 		user3.setEmailId("3@gmail.com");
+ 		user3.setPassword("qwerty123");
+ 		user3.setCovidstatus("n");
+                user3.setAge(19);
+                user3.setVaccinateddoses(2);
+          
+        user4.setUserName(4);
+  	user4.setName("karthik");
+  	user4.setAddress("delhi");
+  	user4.setPhoneNo("98765432310");
+  	user4.setEmailId("4@gmail.com");
+  	user4.setPassword("karthik123");
+  	user4.setCovidstatus("n");
+        user4.setAge(31);
+        user4.setVaccinateddoses(1);
+  		
+ 	user5.setUserName(5);
+ 	user5.setName("devi");
+ 	user5.setAddress("chennai");
+ 	user5.setPhoneNo("812367821334");
+ 	user5.setEmailId("5@gmail.com");
+ 	user5.setPassword("devi123");
+ 	user5.setCovidstatus("n");
+        user5.setAge(38);
+        user5.setVaccinateddoses(2);
+          
+        user6.setUserName(6);
+  	user6.setName("phani");
+  	user6.setAddress("palkad");
+  	user6.setPhoneNo("9876543340");
+  	user6.setEmailId("6@gmail.com");
+  	user6.setPassword("phani123");
+  	user6.setCovidstatus("n");
+        user6.setAge(27);
+        user6.setVaccinateddoses(2);
+        
+        UserData.add(user1);
+ 	UserData.add(user2);
+        UserData.add(user3);
+  	UserData.add(user4);
+        UserData.add(user5);
+        UserData.add(user6);
+        mainMenu();
 	}
 	
 	static void mainMenu() {
@@ -77,9 +129,9 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		while(true) {
-		System.out.println("\n\n------------\nAdmin Menu\n------------\n1.add user");
-		System.out.println("2.modify user");		
-		System.out.println("3.delete user");
+		System.out.println("\n\n----------------------\nAdmin Menu   @Admin\n----------------------\n1.Add user");
+		System.out.println("2.Modify user");		
+		System.out.println("3.Delete user");
 		System.out.println("4.Print one user");     
 		System.out.println("5.Print all users");
 		System.out.println("6.Mainmenu");
@@ -121,7 +173,7 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		int select;
 		while(true) {
-		System.out.println("\n\n------------\nUser Menu\n------------\n1. View USER DETAILS");
+		System.out.println("\n\n--------------------\nUser Menu   @ User\n--------------------\n1. View USER DETAILS");
 		System.out.println("2. Enter view own details");
 		System.out.println("3. Main menu");
 
