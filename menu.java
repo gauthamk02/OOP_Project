@@ -5,21 +5,26 @@ public class menu {
 	static Scanner sc = new Scanner(System.in);
     static boolean admin;
     static User user;
-    //static final private String admin_name="Ananthan";
-    //static final private String admin_passwd="1234";
-    static int admin(String username, String passwd){
-        for(User i : UserManagement.UserData){
-            if(username==i.getName()){
-                if(passwd==i.getPassword()){
-                    return 1;
-                }else{
-                    return -1;
-                }
-            }else{
-                return 0;
+
+    static User login(int userID, String passwd) throws UserNotFoundException
+    {
+        for(User usr : UserManagement.UserData)
+        {
+            if(userID == usr.getUserId())
+            {
+                if(passwd.equals(usr.getPassword())) return usr;
+                else throw new UserNotFoundException("Invalid Credentials");
             }
         }
-        return 1;
+        for(QuarantineUser usr : QuarantineManagement.quarantineUserList)
+        {
+            if(userID == usr.getUserId())
+            {
+                if(passwd.equals(usr.getPassword())) return usr;
+                else throw new UserNotFoundException("Invalid Credentials");
+            }
+        }
+        throw new UserNotFoundException("User not found with userID " + userID);
     }
     static void admin_menu() {
         System.out.println("\n\n\n-------------------------------------");
@@ -88,23 +93,13 @@ public class menu {
         }
     }
 
-    public static List<?> convertObjectToList(Object obj) 
-    {
-        List<?> list = new ArrayList<>();
-        if (obj.getClass().isArray()) {
-            list = Arrays.asList((Object[])obj);
-        } else if (obj instanceof Collection) {
-            list = new ArrayList<>((Collection<?>)obj);
-        }
-        return list;
-    }
-
     public static void main(String[] args) {
-        //fillList();
-        /*try
+        /*fillList();
+        try
         {
             saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");
             saveToFile(UserManagement.UserData, "User.dat");
+            saveToFile(donationmenu.donationList, "Donations.dat");
         }
         catch(IOException ioe)
         {
@@ -113,52 +108,42 @@ public class menu {
         catch(ClassNotFoundException cnfe)
         {
             System.out.println(cnfe);
-        }
-        QuarantineManagement.printQuarantineUsers();
-        QuarantineManagement.quarantineUserList.clear();
-        QuarantineManagement.printQuarantineUsers();
-        */
+        }*/
+
         try
-        {
-            //QuarantineManagement.quarantineUserList = (ArrayList<QuarantineUser>) convertObjectToList(loadFromFile("Qusers.dat"));   
+        { 
             QuarantineManagement.quarantineUserList = loadFromFile("Qusers.dat");
             UserManagement.UserData = loadFromFile("User.dat");
-            donationmenu.donationList = loadFromFile("donations.dat");  
+            donationmenu.donationList = loadFromFile("Donations.dat");  
 
-        }
-        catch(IOException ioe)
-        {
-            System.out.println(ioe);
-        }
-        catch(ClassNotFoundException cnfe)
-        {
-            System.out.println(cnfe);
-        }
 
-        Scanner sc = new Scanner(System.in);
-        //input username
-        System.out.print("Enter your username : ");
-        String user = sc.next();
+            Scanner sc = new Scanner(System.in);
+            //input username
+            System.out.print("Enter your userID : ");
+            int userID = sc.nextInt();
 
-        //input password
-        System.out.print("Enter your password : ");
-        String passwd = sc.next();
-        if (menu.admin(user, passwd) == 1) {
-            admin_menu();
-        } else if (menu.admin(user, passwd) == -1) {
-            System.out.println("Pls Enter Valid User Details !!");
-            main(null);
-        } else {
-            user_menu();
-        }
+            //input password
+            System.out.print("Enter your password : ");
+            String passwd = sc.next();
 
-        sc.close();
+            User usr = login(userID, passwd);
+            if(usr.getAdmin())
+            {
+                admin_menu();
+            }
+            else
+            {
+                user_menu();
+            }
+            sc.close();
 
-        try
-        {
             saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");   
             saveToFile(UserManagement.UserData, "User.dat");
             saveToFile(donationmenu.donationList, "Donations.dat");
+        }
+        catch(UserNotFoundException unfe)
+        {
+            System.out.println(unfe);
         }
         catch(IOException ioe)
         {
@@ -170,12 +155,6 @@ public class menu {
         }
     }
     public static  <T> T loadFromFile(String filename) throws IOException, ClassNotFoundException {
-        /*FileInputStream fis = new FileInputStream(filename);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        Object decList = ois.readObject();
-        ois.close();
-        fis.close();
-        return decList;*/
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
         Object obj =  in.readObject();
         in.close();
@@ -194,7 +173,7 @@ public class menu {
     {
         User user1 = new User();
 		User user2 = new User();
-		user1.setUserName(1);
+		user1.setUserID(1);
 		user1.setName("vijay");
 		user1.setAddress("chirala");
 		 user1.setPhoneNo("81236789087");
@@ -204,7 +183,7 @@ public class menu {
          user1.setAge(18);
          user1.setVaccinateddoses(2);
          user1.setAdmin(true);
-         user2.setUserName(2);
+         user2.setUserID(2);
  		user2.setName("Ajay");
  		user2.setAddress("chirala");
  		 user2.setPhoneNo("9876543210");
@@ -219,11 +198,12 @@ public class menu {
 
         QuarantineUser qu = new QuarantineUser();
         qu.setAddress("Kollam");
-        qu.setUserName(4);
+        qu.setUserID(4);
         qu.setAge(18);
         qu.setQuarantineDays(14);
         qu.setCovidstatus("Negative");
         qu.setEmailId("email@gmail.com");
+        qu.setPassword("1234");
         qu.setName("Rohan");
         qu.setPhoneNo("123456789");
         qu.setAdmin(true);
@@ -231,95 +211,104 @@ public class menu {
         QuarantineManagement.quarantineUserList.add(qu);
     }
 }
-    class help {
-        private String username;
-        private String passwd;
-        static Scanner sc =new Scanner(System.in);
-        static boolean requesthelp() {
-            System.out.println("\n\n\n-------------------------------------");
-            System.out.println("Requesting Help     @User");
-            System.out.println("-------------------------------------\n");
-            
-            System.out.print("Enter your details \nEnter your name: ");
-            String name = null;
-            try {
-                name = sc.next();
-            } catch (InputMismatchException ie) {
-                System.out.println("You Have Entered Invalid Details!!");
-                requesthelp();
-            }
-            System.out.print("Enter The Bugs or uncomfortabilities you are feeling in the program :");
-            String Message = sc.next();
-            Message+=sc.nextLine();
-            Date date = Calendar.getInstance().getTime();
 
-            try {
-                File f = new File("help.txt");
-                FileWriter fw = new FileWriter(f, true);
-                if (!f.exists()) {
-                    f.createNewFile();
-                }
-                fw.write("Name :"+name + "\t"+"\t"+"Message :" + Message +"\t"+ "\t"+"Date :" +date+"\n");
-                fw.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return true;
+class help {
+    private String username;
+    private String passwd;
+    static Scanner sc =new Scanner(System.in);
+    static boolean requesthelp() {
+        System.out.println("\n\n\n-------------------------------------");
+        System.out.println("Requesting Help     @User");
+        System.out.println("-------------------------------------\n");
+        
+        System.out.print("Enter your details \nEnter your name: ");
+        String name = null;
+        try {
+            name = sc.next();
+        } catch (InputMismatchException ie) {
+            System.out.println("You Have Entered Invalid Details!!");
+            requesthelp();
         }
+        System.out.print("Enter The Bugs or uncomfortabilities you are feeling in the program :");
+        String Message = sc.next();
+        Message+=sc.nextLine();
+        Date date = Calendar.getInstance().getTime();
 
-        static void mng_hlp_requests() {
-            System.out.println("\n\n\n-------------------------------------");
-            System.out.println("Help Requests Management     @Admin");
-            System.out.println("-------------------------------------\n");
-            System.out.println("Welcome to the Help Requests Management Software :\nwhat would you like to do ?");
-            System.out.println("1.Delete All Help Requests");
-            System.out.println("2.Get Help Request Data");
-            System.out.print("Enter your choice : ");
-            int choice = 0;
-            try {
-                choice = sc.nextInt();
-            } catch (InputMismatchException ime) {
-                System.out.println("Enter Correct Datatype in the coloumn");
-                mng_hlp_requests();
+        try {
+            File f = new File("help.txt");
+            FileWriter fw = new FileWriter(f, true);
+            if (!f.exists()) {
+                f.createNewFile();
             }
-            if(choice==1){
-                del_help_req();
-            }else if(choice==2){
-                read_help_req();
-            }
+            fw.write("Name :"+name + "\t"+"\t"+"Message :" + Message +"\t"+ "\t"+"Date :" +date+"\n");
+            fw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        static boolean del_help_req(){
-            try{
-                FileWriter file=new FileWriter("help.txt",false);
-                file.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return true;
+        return true;
+    }
 
+    static void mng_hlp_requests() {
+        System.out.println("\n\n\n-------------------------------------");
+        System.out.println("Help Requests Management     @Admin");
+        System.out.println("-------------------------------------\n");
+        System.out.println("Welcome to the Help Requests Management Software :\nwhat would you like to do ?");
+        System.out.println("1.Delete All Help Requests");
+        System.out.println("2.Get Help Request Data");
+        System.out.print("Enter your choice : ");
+        int choice = 0;
+        try {
+            choice = sc.nextInt();
+        } catch (InputMismatchException ime) {
+            System.out.println("Enter Correct Datatype in the coloumn");
+            mng_hlp_requests();
         }
-        static boolean read_help_req(){
-            try{
-                File f = new File("help.txt");
-                if(!f.exists()){
-                    f.createNewFile();
-                }
-                FileReader fr =new FileReader(f);
-                ArrayList<String> array =new ArrayList<>();
-                String str = new String();
-                while(str == String.valueOf(fr.read() != -1)){
-                    array.add(str);
-                }
-                fr.close();
-                for(String i:array){
-                    System.out.println(i);
-
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return true;
+        if(choice==1){
+            del_help_req();
+        }else if(choice==2){
+            read_help_req();
         }
     }
+    static boolean del_help_req(){
+        try{
+            FileWriter file=new FileWriter("help.txt",false);
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+
+    }
+    static boolean read_help_req(){
+        try{
+            File f = new File("help.txt");
+            if(!f.exists()){
+                f.createNewFile();
+            }
+            FileReader fr =new FileReader(f);
+            ArrayList<String> array =new ArrayList<>();
+            String str = new String();
+            while(str == String.valueOf(fr.read() != -1)){
+                array.add(str);
+            }
+            fr.close();
+            for(String i:array){
+                System.out.println(i);
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+}
+
+class UserNotFoundException extends Exception
+{
+    UserNotFoundException(String str)
+    {
+        super(str);
+    }
+}

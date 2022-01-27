@@ -59,7 +59,7 @@ public class QuarantineManagement{
     {
         /*QuarantineUser qu = new QuarantineUser();
         qu.setAddress("Kollam");
-        qu.setUserName(4);
+        qu.setUserID(4);
         qu.setAge(18);
         qu.setQuarantineDays(14);
         qu.setCovidstatus("Negative");
@@ -144,7 +144,7 @@ public class QuarantineManagement{
 
                 System.out.print(" Enter userId: ");
                 int userId = in.nextInt();
-                user.setUserName(userId);
+                user.setUserID(userId);
                 
                 if(in.hasNextLine()) in.nextLine();
                 System.out.print(" Enter Name: ");
@@ -231,7 +231,7 @@ public class QuarantineManagement{
     {
         QuarantineUser qu = new QuarantineUser();
         qu.setAddress("Kollam");
-        qu.setUserName(4);
+        qu.setUserID(4);
         qu.setAge(18);
         qu.setQuarantineDays(14);
         qu.setCovidstatus("Negative");
@@ -320,7 +320,7 @@ public class QuarantineManagement{
     {
         QuarantineUser qu = new QuarantineUser();
         qu.setAddress("Kollam");
-        qu.setUserName(4);
+        qu.setUserID(4);
         qu.setAge(18);
         qu.setQuarantineDays(14);
         qu.setCovidstatus("Negative");
@@ -401,7 +401,7 @@ public class QuarantineManagement{
                 QuarantineUser user = new QuarantineUser();
                 System.out.print(" Enter userId: ");
                 int userId = in.nextInt();
-                user.setUserName(userId);
+                user.setUserID(userId);
                 
                 if(in.hasNextLine()) in.nextLine();
                 System.out.print(" Enter Name: ");
@@ -501,7 +501,7 @@ public class QuarantineManagement{
                 System.out.println("Curent User ID: " +  user.getUserId());
                 System.out.println("Enter new User ID: ");
                 int newUserID = in.nextInt();
-                user.setUserName(newUserID);
+                user.setUserID(newUserID);
                 break;
             case 3:
                 System.out.println("Curent Address: " +  user.getAddress());

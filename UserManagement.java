@@ -11,7 +11,7 @@ public class UserManagement {
 	public static void main(String[] args) {
         User user1 = new User();
 		User user2 = new User();
-		user1.setUserName(1);
+		user1.setUserID(1);
 		user1.setName("vijay");
 		user1.setAddress("chirala");
 		 user1.setPhoneNo("81236789087");
@@ -20,7 +20,7 @@ public class UserManagement {
 		 user1.setCovidstatus("n");
          user1.setAge(18);
          user1.setVaccinateddoses(2);
-         user2.setUserName(2);
+         user2.setUserID(2);
  		user2.setName("Ajay");
  		user2.setAddress("chirala");
  		 user2.setPhoneNo("9876543210");
@@ -209,7 +209,7 @@ public class UserManagement {
                
                System.out.print(" Enter userId => ");
                int userId = scanner.nextInt();
-               user.setUserName(userId);
+               user.setUserID(userId);
                scanner.nextLine();
                
                System.out.print(" Enter Name => ");
@@ -300,7 +300,7 @@ public class UserManagement {
                 System.out.println("Curent User ID: " +  user.getUserId());
                 System.out.println("Enter new User ID: ");
                 int newUserID = in.nextInt();
-                user.setUserName(newUserID);
+                user.setUserID(newUserID);
                 break;
             case 3:
                 System.out.println("Curent Address: " +  user.getAddress());
@@ -400,8 +400,8 @@ class User implements Serializable
     public int getUserId() {
         return userId;
     }
-    public void setUserName(int userId2) {
-        this.userId = userId2;
+    public void setUserID(int userId) {
+        this.userId = userId;
     }
     public String getPassword() {
         return password;

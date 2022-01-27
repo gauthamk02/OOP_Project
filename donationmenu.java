@@ -24,8 +24,6 @@ public class donationmenu{
             String user_id=s.next();
             System.out.println("Enter amount: ");
             int amt=s.nextInt();
-            System.out.println("Enter date: ");
-            //LocalDate dd= s.nextLocalDate();    //No function nextlocaldate
             donation donation = new donation(user_id,amt,LocalDate.now());
             donationList.add(donation);
             System.out.println("Transaction Sucessful.");
@@ -56,6 +54,7 @@ public class donationmenu{
             System.out.println("Enter date: ");
             //LocalDate dd= s.nextLocalDate();    //No function nextlocaldate
             donation donation = new donation(user_id,amt,LocalDate.now());
+            donationList.add(donation);
             System.out.println("Transaction Sucessful.");
         }
         else if(c==2){
@@ -65,8 +64,6 @@ public class donationmenu{
             System.out.println("Enter amount: ");
             int amt=s.nextInt();
             System.out.println("Enter date: ");
-            //LocalDate dd= s.nextLocalDate();    //No function nextlocaldate
-            //donationmenu withdraw = new donationmenu(user_id,amt,LocalDate.now());
             System.out.println("Transaction Sucessful.");
         }
         else if (c==3){
