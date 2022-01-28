@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -5,6 +6,8 @@ import java.util.Scanner;
 
 public class UserManagement {
 	static ArrayList<User> UserData = new ArrayList();
+    static Scanner in = new Scanner(System.in);
+
 	public static void main(String[] args) {
                 User user1 = new User();
 		User user2 = new User();
@@ -87,11 +90,11 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		 int choice,c=0;
 		 while(true) {
- 		 System.out.println("\n\n------------\nMain Menu\n------------\n1.Admin");
+ 		 System.out.println("\n\nMain Menu\n1.Admin");
  		 System.out.println("2.User");
  		 System.out.println("3.Exit");
  		 System.out.println("Enter your choice=");
- 		 choice=Integer.parseInt(sc.nextLine());
+ 		 choice=in.nextInt();
  		 switch(choice) {
  		 case 1:
  			adminMenu();
@@ -129,6 +132,7 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		while(true) {
+
 		System.out.println("\n\n----------------------\nAdmin Menu   @Admin\n----------------------\n1.Add user");
 		System.out.println("2.Modify user");		
 		System.out.println("3.Delete user");
@@ -173,6 +177,7 @@ public class UserManagement {
 		Scanner sc = new Scanner(System.in);
 		int select;
 		while(true) {
+
 		System.out.println("\n\n--------------------\nUser Menu   @ User\n--------------------\n1. View USER DETAILS");
 		System.out.println("2. Enter view own details");
 		System.out.println("3. Main menu");
@@ -188,7 +193,6 @@ public class UserManagement {
         System.out.println(menu.user.toString());
 		break;
 	case 3: 
-        mainMenu();
 		break;
 	}
 		}
@@ -259,7 +263,7 @@ public class UserManagement {
                
                System.out.print(" Enter userId => ");
                int userId = scanner.nextInt();
-               user.setUserName(userId);
+               user.setUserID(userId);
                scanner.nextLine();
                
                System.out.print(" Enter Name => ");
@@ -350,7 +354,7 @@ public class UserManagement {
                 System.out.println("Curent User ID: " +  user.getUserId());
                 System.out.println("Enter new User ID: ");
                 int newUserID = in.nextInt();
-                user.setUserName(newUserID);
+                user.setUserID(newUserID);
                 break;
             case 3:
                 System.out.println("Curent Address: " +  user.getAddress());
@@ -394,10 +398,13 @@ public class UserManagement {
         System.out.println("Details are updated");
         adminMenu();
     }
+
+    
 }
 
 
-class User {
+class User implements Serializable
+{
     private String address;
     private String Name;
     private int userId;
@@ -406,7 +413,9 @@ class User {
     private String phoneNo;
     public int age;
     public int vaccinateddoses;
-    public String covidstatus; 
+    public String covidstatus;
+    private boolean admin;
+
     public String getAddress(){
         return address;
     }
@@ -445,8 +454,8 @@ class User {
     public int getUserId() {
         return userId;
     }
-    public void setUserName(int userId2) {
-        this.userId = userId2;
+    public void setUserID(int userId) {
+        this.userId = userId;
     }
     public String getPassword() {
         return password;
@@ -466,7 +475,14 @@ class User {
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
-    
+    public boolean getAdmin()
+    {
+        return this.admin;
+    }
+    public void setAdmin(boolean admin)
+    {
+        this.admin = admin;
+    } 
     @Override
     public String toString() {
         return  "\nName=" + Name + "\nuserId=" + userId +"\nAddress=" + address + "\npassword=" +
