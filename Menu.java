@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class menu {
+public class Menu {
 	static Scanner sc = new Scanner(System.in);
     static boolean admin;
     static User user;
@@ -27,69 +27,76 @@ public class menu {
         throw new UserNotFoundException("User not found with userID " + userID);
     }
     static void admin_menu() {
-        System.out.println("\n\n\n-------------------------------------");
-        System.out.print("Covid Management System\n------------------------------------\n");
-        System.out.println("Main Menu     @Admin");
-        System.out.println("-------------------------------------\n");
-        System.out.println("1. User Management");
-        System.out.println("2. Quarantine Management");
-        System.out.println("3. Donations");
-        System.out.println("4. Manage help Requests");
-        System.out.println("5. Quit");
-        System.out.print("Enter your choice : ");
-        int choice = sc.nextInt();
-        if (choice == 1) {
-            // usermanagement(username,passwrd);
-            UserManagement.adminMenu();
-        } else if (choice == 2) {
-            //quarantine_management(username,passwrd);
-            QuarantineManagement.admin_menu();
-        } else if (choice == 3) {
-            //Donation(username,passwrd);
-            donationmenu.menu_admin();
-        } else if (choice == 4) {
-            help.mng_hlp_requests();
-        } else if (choice == 5) {
-            System.out.println("Thank you");
-            System.out.println("The Program is being closed");
-        } else {
-            System.out.println("Please Enter A Valid Input");
-            admin_menu();
+        boolean loop = true;
+        while(loop)
+        {
+            System.out.println("\n\n\n-------------------------------------");
+            System.out.print("Covid Management System\n-------------------------------------\n");
+            System.out.println("Main Menu     @Admin");
+            System.out.println("-------------------------------------\n");
+            System.out.println("1. User Management");
+            System.out.println("2. Quarantine Management");
+            System.out.println("3. Donations");
+            System.out.println("4. Manage help Requests");
+            System.out.println("5. Quit");
+            System.out.print("Enter your choice : ");
+            int choice = sc.nextInt();
+            if (choice == 1) {
+                // usermanagement(username,passwrd);
+                UserManagement.adminMenu();
+            } else if (choice == 2) {
+                //quarantine_management(username,passwrd);
+                QuarantineManagement.admin_menu();
+            } else if (choice == 3) {
+                //Donation(username,passwrd);
+                DonationMenu.menu_admin();
+            } else if (choice == 4) {
+                help.mng_hlp_requests();
+            } else if (choice == 5) {
+                System.out.println("\n\nThank you");
+                System.out.println("The Program is being closed");
+                loop = false;
+            } else {
+                System.out.println("Please Enter A Valid Input");
+                admin_menu();
+            }
         }
-        
     }
 
     static void user_menu() {
-        
-        System.out.println("\n\n\n-------------------------------------");
-        System.out.print("Covid Management System\n------------------------------------\n");
-        System.out.println("Main Menu     @User");
-        System.out.println("-------------------------------------\n");
-        
-        System.out.println("1. User Management");
-        System.out.println("2. Quarantine Management");
-        System.out.println("3. Donate");
-        System.out.println("4. Request Help");
-        System.out.println("5. Quit");
-        System.out.print("Enter your choice : ");
-        int choice = sc.nextInt();
-        if (choice == 1) {
-            //usermanagement(username,passwrd);
-            UserManagement.userMenu();
-        } else if (choice == 2) {
-            //quarantinemanagement(username,passwrd);
-            QuarantineManagement.user_menu();
-        } else if (choice == 3) {
-            //Donation(username,passwrd);
-            donationmenu.menu_user();
-        } else if (choice == 4) {
-            help.requesthelp();
-        } else if (choice == 5) {
-            System.out.println("Thank you ");
-            System.out.println("The program is being closed");
-        } else {
-            System.out.println("Please Enter A Valid Input");
-            user_menu();
+        boolean loop = true;
+        while(loop)
+            {
+            System.out.println("\n\n\n-------------------------------------");
+            System.out.println("Covid Management System\n------------------------------------");
+            System.out.println("Main Menu     @User");
+            System.out.println("-------------------------------------\n");
+            
+            System.out.println("1. User Management");
+            System.out.println("2. Quarantine Management");
+            System.out.println("3. Donate");
+            System.out.println("4. Request Help");
+            System.out.println("5. Quit");
+            System.out.print("Enter your choice : ");
+            int choice = sc.nextInt();
+            if (choice == 1) {
+                //usermanagement(username,passwrd);
+                UserManagement.userMenu();
+            } else if (choice == 2) {
+                //quarantinemanagement(username,passwrd);
+                QuarantineManagement.user_menu();
+            } else if (choice == 3) {
+                //Donation(username,passwrd);
+                DonationMenu.menu_user();
+            } else if (choice == 4) {
+                help.requesthelp();
+            } else if (choice == 5) {
+                System.out.println("Thank you ");
+                System.out.println("The program is being closed");
+            } else {
+                System.out.println("Please Enter A Valid Input");
+                user_menu();
+            }
         }
     }
 
@@ -99,7 +106,7 @@ public class menu {
         {
             saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");
             saveToFile(UserManagement.UserData, "User.dat");
-            saveToFile(donationmenu.donationList, "Donations.dat");
+            saveToFile(DonationMenu.donationList, "Donations.dat");
         }
         catch(IOException ioe)
         {
@@ -114,8 +121,9 @@ public class menu {
         { 
             QuarantineManagement.quarantineUserList = loadFromFile("Qusers.dat");
             UserManagement.UserData = loadFromFile("User.dat");
-            donationmenu.donationList = loadFromFile("Donations.dat");  
-
+            DonationMenu.donationList = loadFromFile("Donations.dat");
+            
+            //UserManagement.fillUsers();
 
             Scanner sc = new Scanner(System.in);
             //input username
@@ -126,8 +134,8 @@ public class menu {
             System.out.print("Enter your password : ");
             String passwd = sc.next();
 
-            User usr = login(userID, passwd);
-            if(usr.getAdmin())
+            user = login(userID, passwd);
+            if(user.isAdmin())
             {
                 admin_menu();
             }
@@ -139,7 +147,7 @@ public class menu {
 
             saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");   
             saveToFile(UserManagement.UserData, "User.dat");
-            saveToFile(donationmenu.donationList, "Donations.dat");
+            saveToFile(DonationMenu.donationList, "Donations.dat");
         }
         catch(UserNotFoundException unfe)
         {

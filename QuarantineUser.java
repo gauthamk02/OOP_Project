@@ -52,8 +52,11 @@ class QuarantineUser extends User implements Serializable
     }
     @Override
     public String toString() {
-        return "\nName: " + getName() + "\nAddress: " + getAddress() + "\nUserId: " + getUserId() +
-        "\nEmailId: " + getEmailId() + "\nCovid Status: "+covidstatus +" \nVaccinated Doses: "+vaccinateddoses+"\nAge: "+age+"\nPhoneNo=" + getPhoneNo() +
-        "\nQuarantine Days: " + getQuarantineDays();
+		String details = "\nName: " + super.getName() + "\nUserID: " + super.getUserId() +"\nAddress: " + super.getAddress() +
+        "\nEmailID: " + super.getEmailId() + "\nCovid Status: "+ super.covidstatus +"\nVaccinated Doses: " +
+		vaccinateddoses + "\nAge: " + age + "\nPhone No: " + super.getPhoneNo() + "\nQuarantine Begin Date: " + qurantineBeginDate +
+        "\nQuarantine End Date: " + qurantineEndDate + "\nQuarantine Days: " + quarantineDays + "\nPrimary Contact: " + primaryContact; 
+		if(Menu.user.isAdmin()) details += "\nPassword: " + super.getPassword();
+        return details; 
     }
 }
