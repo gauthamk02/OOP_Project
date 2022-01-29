@@ -16,7 +16,7 @@ public class DonationMenu{
         boolean loop = true;
         while(loop)
         {
-            System.out.println("\n-------------------------------\n");
+            System.out.println("\n-------------------------------------");
             System.out.println("Donation Menu     @User");
             System.out.println("-------------------------------------\n");
             System.out.println("1. Donate");
@@ -25,11 +25,9 @@ public class DonationMenu{
             System.out.print("Enter your choice: ");
             int c = in.nextInt();
             if (c==1){
-                System.out.println("Enter user id: ");
-                int user_id= in.nextInt();
-                System.out.println("Enter amount: ");
+                System.out.print("Enter amount: ");
                 int amt= in.nextInt();
-                Donation donation = new Donation(user_id,amt,LocalDate.now());
+                Donation donation = new Donation(Menu.user.getUserId(),amt,LocalDate.now());
                 donationList.add(donation);
                 System.out.println("Transaction Sucessful.");
             }
@@ -54,11 +52,12 @@ public class DonationMenu{
             System.out.println("1. Donate");
             System.out.println("2. Withdraw");
             System.out.println("3. Donation Log");
-            System.out.println("4. Exit");
+            System.out.println("4. Total Donated Amount");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
             int c = in.nextInt();
             if (c==1){
-                System.out.print("Enter user id: ");
+                System.out.print("Enter donated user's ID: ");
                 int user_id= in.nextInt();
                 System.out.print("Enter amount: ");
                 int amt = in.nextInt();
@@ -67,13 +66,13 @@ public class DonationMenu{
                 System.out.println("Donation Sucessful.");
             }
             else if(c==2){
-                System.out.println("Enter user id: ");
+                System.out.print("Enter user id: ");
                 int uid = in.nextInt();
                 for(Donation dn : donationList)
                 {
                     if(dn.getuserid() == uid)
                     {
-                        dn.setwithdrawn(false);
+                        dn.setwithdrawn(true);
                         System.out.println(dn);
                     }
                 }
@@ -81,7 +80,18 @@ public class DonationMenu{
             else if (c==3){
                 donation_log();
             }
-            else if (c==4){
+            else if (c == 4){
+                int total = 0;
+                int withdrawn = 0;
+                for(Donation don : donationList){
+                    total += don.getamount();
+                    if(don.getwithdrawn()) withdrawn += don.getamount();
+                }
+                System.out.println("\nTotal Amount Donated: " + total);
+                System.out.println("Amount left to withdraw: " + (total - withdrawn));
+                System.out.println("Amount withdrawn: " + withdrawn);
+            }
+            else if (c==5){
                 loop = false;
             }
             else {

@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Menu {
-	static Scanner sc = new Scanner(System.in);
+	static Scanner in = new Scanner(System.in);
     static boolean admin;
     static User user;
 
@@ -26,6 +26,43 @@ public class Menu {
         }
         throw new UserNotFoundException("User not found with userID " + userID);
     }
+    static int admin(int userId, String passwd){
+        for(User usr : UserManagement.UserData){
+            if(userId == usr.getUserId()){
+                if(passwd.equals(usr.getPassword())){
+                    Menu.user = usr;
+                    if(usr.isAdmin()){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else{
+                    return -1;
+                }
+            }
+        }
+
+        for(User usr : QuarantineManagement.quarantineUserList){
+            if(userId == usr.getUserId()){
+                if(passwd.equals(usr.getPassword())){
+                    Menu.user = usr;
+                    if(usr.isAdmin()){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else{
+                    return -1;
+                }
+            }
+        }
+        return 2;    
+    }
+
     static void admin_menu() {
         boolean loop = true;
         while(loop)
@@ -39,8 +76,8 @@ public class Menu {
             System.out.println("3. Donations");
             System.out.println("4. Manage help Requests");
             System.out.println("5. Quit");
-            System.out.print("Enter your choice : ");
-            int choice = sc.nextInt();
+            System.out.print("Enter your choice: ");
+            int choice = in.nextInt();
             if (choice == 1) {
                 // usermanagement(username,passwrd);
                 UserManagement.adminMenu();
@@ -58,7 +95,6 @@ public class Menu {
                 loop = false;
             } else {
                 System.out.println("Please Enter A Valid Input");
-                admin_menu();
             }
         }
     }
@@ -78,7 +114,7 @@ public class Menu {
             System.out.println("4. Request Help");
             System.out.println("5. Quit");
             System.out.print("Enter your choice : ");
-            int choice = sc.nextInt();
+            int choice = in.nextInt();
             if (choice == 1) {
                 //usermanagement(username,passwrd);
                 UserManagement.userMenu();
@@ -93,6 +129,7 @@ public class Menu {
             } else if (choice == 5) {
                 System.out.println("Thank you ");
                 System.out.println("The program is being closed");
+                loop = false;
             } else {
                 System.out.println("Please Enter A Valid Input");
                 user_menu();
@@ -125,25 +162,25 @@ public class Menu {
             
             //UserManagement.fillUsers();
 
-            Scanner sc = new Scanner(System.in);
             //input username
-            System.out.print("Enter your userID : ");
-            int userID = sc.nextInt();
+            System.out.print("Enter your userId : ");
+            int user = in.nextInt();
 
             //input password
             System.out.print("Enter your password : ");
-            String passwd = sc.next();
-
-            user = login(userID, passwd);
-            if(user.isAdmin())
-            {
+            String passwd = in.next();
+            if (Menu.admin(user, passwd) == 1) {
                 admin_menu();
             }
-            else
-            {
+            else if(Menu.admin(user,passwd)==0){
                 user_menu();
             }
-            sc.close();
+            else if (Menu.admin(user, passwd) == -1) {
+                throw new UserNotFoundException("Invalid Details");
+            }
+            else if(Menu.admin(user, passwd)==2){
+                throw new UserNotFoundException("Sorry , Given User doesnt exist ");
+            }
 
             saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");   
             saveToFile(UserManagement.UserData, "User.dat");
@@ -248,7 +285,7 @@ class help {
             if (!f.exists()) {
                 f.createNewFile();
             }
-            fw.write("Name :"+name + "\t"+"\t"+"Message :" + Message +"\t"+ "\t"+"Date :" +date+"\n");
+            fw.write("Name:\t"+name + "\t"+"\t"+"Message:\t" + Message +"\t"+ "\t"+"Date:\t" +date+"\n");
             fw.close();
 
         } catch (IOException e) {
@@ -268,6 +305,7 @@ class help {
         int choice = 0;
         try {
             choice = sc.nextInt();
+            System.out.println();
         } catch (InputMismatchException ime) {
             System.out.println("Enter Correct Datatype in the coloumn");
             mng_hlp_requests();
@@ -295,17 +333,13 @@ class help {
                 f.createNewFile();
             }
             FileReader fr =new FileReader(f);
-            ArrayList<String> array =new ArrayList<>();
-            String str = new String();
-            while(str == String.valueOf(fr.read() != -1)){
-                array.add(str);
-            }
+            char[] chars = new char[(int) f.length()];
+            fr.read(chars);
+ 
+            String fileContent = new String(chars);
+            System.out.println(fileContent);
+
             fr.close();
-            for(String i:array){
-                System.out.println(i);
-
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
