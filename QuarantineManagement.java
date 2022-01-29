@@ -184,13 +184,16 @@ public class QuarantineManagement{
             case 5:
                 System.out.print("Enter the UserID of the user: ");
                 int userid = in.nextInt();
+                boolean usrExist = false;
                 for(QuarantineUser User : quarantineUserList)
                 {
                     if(User.getUserId() == userid)
                     {
+                        usrExist = true;
                         updateUserDetails(User);
                     } 
                 }
+                if(!usrExist) System.out.println("User not found!");
                 break;
             case 6:
                 System.out.print("Enter the UserID of the user: ");

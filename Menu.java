@@ -214,52 +214,9 @@ public class Menu {
         fos.close();
     }
 
-    static void fillList()
-    {
-        User user1 = new User();
-		User user2 = new User();
-		user1.setUserID(1);
-		user1.setName("vijay");
-		user1.setAddress("chirala");
-		 user1.setPhoneNo("81236789087");
-		 user1.setEmailId("@gmail.com");
-		 user1.setPassword("qwerty");
-		 user1.setCovidstatus("n");
-         user1.setAge(18);
-         user1.setVaccinateddoses(2);
-         user1.setAdmin(true);
-         user2.setUserID(2);
- 		user2.setName("Ajay");
- 		user2.setAddress("chirala");
- 		 user2.setPhoneNo("9876543210");
- 		 user2.setEmailId("@gmail.com");
- 		 user2.setPassword("asdfghjkl");
- 		 user2.setCovidstatus("n");
-          user2.setAdmin(false);
-          user2.setAge(21);
-          user2.setVaccinateddoses(2);
- 		 UserManagement.UserData.add(user1);
- 		 UserManagement.UserData.add(user2);
-
-        QuarantineUser qu = new QuarantineUser();
-        qu.setAddress("Kollam");
-        qu.setUserID(4);
-        qu.setAge(18);
-        qu.setQuarantineDays(14);
-        qu.setCovidstatus("Negative");
-        qu.setEmailId("email@gmail.com");
-        qu.setPassword("1234");
-        qu.setName("Rohan");
-        qu.setPhoneNo("123456789");
-        qu.setAdmin(true);
-
-        QuarantineManagement.quarantineUserList.add(qu);
-    }
 }
 
 class help {
-    private String username;
-    private String passwd;
     static Scanner sc =new Scanner(System.in);
     static boolean requesthelp() {
         System.out.println("\n\n\n-------------------------------------");
