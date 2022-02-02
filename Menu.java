@@ -138,35 +138,15 @@ public class Menu {
     }
 
     public static void main(String[] args) {
-        /*fillList();
-        try
-        {
-            saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");
-            saveToFile(UserManagement.UserData, "User.dat");
-            saveToFile(DonationMenu.donationList, "Donations.dat");
-        }
-        catch(IOException ioe)
-        {
-            System.out.println(ioe);
-        }
-        catch(ClassNotFoundException cnfe)
-        {
-            System.out.println(cnfe);
-        }*/
-
         try
         { 
             QuarantineManagement.quarantineUserList = loadFromFile("Qusers.dat");
             UserManagement.UserData = loadFromFile("User.dat");
             DonationMenu.donationList = loadFromFile("Donations.dat");
             
-            //UserManagement.fillUsers();
-
-            //input username
             System.out.print("Enter your userId : ");
             int user = in.nextInt();
 
-            //input password
             System.out.print("Enter your password : ");
             String passwd = in.next();
             if (Menu.admin(user, passwd) == 1) {

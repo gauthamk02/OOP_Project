@@ -89,9 +89,9 @@ public class QuarantineManagement{
             case 3:
                 System.out.println("1.Name\n" +
                                 "2.Age\n" +
-                                "3.Quarantine Begin Date" +
-                                "4.Quarantine End Date" +
-                                "5.Quarantine Days");
+                                "3.Quarantine Begin Date\n" +
+                                "4.Quarantine End Date\n" +
+                                "5.Quarantine Days\n");
                 System.out.print("Enter the number of the field to sort on:");
                 int sortChoice = in.nextInt();
                 switch(sortChoice)
@@ -119,6 +119,7 @@ public class QuarantineManagement{
                     default:
                         System.out.println("Invalid Input!");
                 }
+                break;
             case 4:
                 QuarantineUser user = new QuarantineUser();
 
