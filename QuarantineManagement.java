@@ -166,7 +166,7 @@ public class QuarantineManagement{
 
                 System.out.print(" Enter Quarantine End Date(yyyy-mm-dd): ");
                 LocalDate quarantineEndDate = LocalDate.parse(in.next());
-                user.setQuarantineBeginDate(quarantineEndDate);
+                user.setQuarantineEndDate(quarantineEndDate);
 
                 System.out.print(" Enter if Primary Contact(true/false): ");
                 boolean primaryContact = in.nextBoolean();
