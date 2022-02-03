@@ -19,7 +19,7 @@ public class UserManagement {
 		System.out.println("5.Print all users");
 		System.out.println("6.Back");
 		System.out.println("Enter your choice: ");
-		choice=Integer.parseInt(in.nextLine());
+		choice= in.nextInt();
 		
 		switch(choice) {
 		case 1: 
@@ -62,7 +62,7 @@ public class UserManagement {
 		System.out.println("3. Back");
 
 		System.out.print(" Enter your choice: ");
-		select=Integer.parseInt(in.nextLine());
+		select= in.nextInt();
 	switch(select)
 	{
 	case 1: userDetails();
