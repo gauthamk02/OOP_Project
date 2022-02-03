@@ -26,42 +26,6 @@ public class Menu {
         }
         throw new UserNotFoundException("User not found with userID " + userID);
     }
-    static int admin(int userId, String passwd){
-        for(User usr : UserManagement.UserData){
-            if(userId == usr.getUserId()){
-                if(passwd.equals(usr.getPassword())){
-                    Menu.user = usr;
-                    if(usr.isAdmin()){
-                        return 1;
-                    }
-                    else{
-                        return 0;
-                    }
-                }
-                else{
-                    return -1;
-                }
-            }
-        }
-
-        for(User usr : QuarantineManagement.quarantineUserList){
-            if(userId == usr.getUserId()){
-                if(passwd.equals(usr.getPassword())){
-                    Menu.user = usr;
-                    if(usr.isAdmin()){
-                        return 1;
-                    }
-                    else{
-                        return 0;
-                    }
-                }
-                else{
-                    return -1;
-                }
-            }
-        }
-        return 2;    
-    }
 
     static void admin_menu() {
         boolean loop = true;
@@ -145,22 +109,14 @@ public class Menu {
             DonationMenu.donationList = loadFromFile("Donations.dat");
             
             System.out.print("Enter your userId : ");
-            int user = in.nextInt();
+            int userId = in.nextInt();
 
             System.out.print("Enter your password : ");
             String passwd = in.next();
-            if (Menu.admin(user, passwd) == 1) {
-                admin_menu();
-            }
-            else if(Menu.admin(user,passwd)==0){
-                user_menu();
-            }
-            else if (Menu.admin(user, passwd) == -1) {
-                throw new UserNotFoundException("Invalid Details");
-            }
-            else if(Menu.admin(user, passwd)==2){
-                throw new UserNotFoundException("Sorry , Given User doesnt exist ");
-            }
+            
+            Menu.user = login(userId, passwd);
+            if(user.isAdmin()) admin_menu();
+            else user_menu();
 
             saveToFile(QuarantineManagement.quarantineUserList, "Qusers.dat");   
             saveToFile(UserManagement.UserData, "User.dat");

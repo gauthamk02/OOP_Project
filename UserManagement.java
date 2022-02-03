@@ -26,7 +26,7 @@ public class UserManagement {
             addUser();
 				break;
 		case 2: System.out.print("Enter the UserID of the user: ");
-				int userid = Integer.parseInt(in.next());
+				int userid = in.nextInt();
 				for(User User : UserData)
 				{
 					if(User.getUserId()==userid)
@@ -183,6 +183,7 @@ public class UserManagement {
 	    int id;
 	    System.out.print("Enter id to be deleted:");
 	    id = in.nextInt();
+		in.nextLine();
 	    for (User user : UserData) 
 		{
 	    	User deluser = user;
