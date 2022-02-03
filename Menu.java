@@ -135,6 +135,7 @@ public class Menu {
             System.out.println(cnfe);
         }
     }
+    
     public static  <T> T loadFromFile(String filename) throws IOException, ClassNotFoundException {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
         Object obj =  in.readObject();

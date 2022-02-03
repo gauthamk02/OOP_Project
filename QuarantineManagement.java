@@ -65,7 +65,7 @@ public class QuarantineManagement{
             "7. Back\n" +
             "Enter the choice: ");
         int choice = in.nextInt();
-
+            System.out.println();
         switch(choice)
         {
             case 1:
@@ -73,17 +73,17 @@ public class QuarantineManagement{
                 break;
             
             case 2:
-                System.out.print("Enter the UserID of the user: ");
-                int id = in.nextInt();
+                boolean userFound = false;
                 for(QuarantineUser user : quarantineUserList)
                 {
-                    if(Menu.user.getUserId() == id)
+                    if(Menu.user.getUserId() == user.getUserId())
                     {
+                        userFound = true;
                         updateUserDetails(user);
                         break;
                     } 
                 }
-                System.out.print("User not Found!");
+                if(!userFound) System.out.print("User not Found!");
                 break;
             
             case 3:
@@ -237,21 +237,29 @@ public class QuarantineManagement{
         switch(choice)
         {
             case 1:
-                printQuarantineUsers();
-                break;
-            
-            case 2:
                 boolean usrExist = false;
                 for(QuarantineUser user : quarantineUserList)
                 {
                     if(Menu.user.getUserId() == user.getUserId())
                     {
-                        updateUserDetails(user);
-                        usrExist = true;
-                        break;
+                        printQuarantineUsers();
                     } 
                 }
                 if(!usrExist) System.out.print("\nUser not Found!");
+                break;
+            
+            case 2:
+                boolean usrexist = false;
+                for(QuarantineUser user : quarantineUserList)
+                {
+                    if(Menu.user.getUserId() == user.getUserId())
+                    {
+                        updateUserDetails(user);
+                        usrexist = true;
+                        break;
+                    } 
+                }
+                if(!usrexist) System.out.print("\nUser not Found!");
                 break;
             
             case 3:
