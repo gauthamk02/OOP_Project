@@ -81,7 +81,7 @@ public class UserManagement {
     
     static void userDetails() {
     	System.out.print("Enter ID of the user to get the details: ");
-		int id = Integer.parseInt(in.next());
+		int id = in.nextInt();
 		int flag=0;
 		for (User user : UserData) 
 		{
@@ -103,7 +103,7 @@ public class UserManagement {
 	static void view_user()
 	{
 		System.out.print("Enter UserID to details: ");
-		int id = Integer.parseInt(in.next());
+		int id = in.nextInt();
 		int flag=0;
 		for (User user : UserData) 
 		{
